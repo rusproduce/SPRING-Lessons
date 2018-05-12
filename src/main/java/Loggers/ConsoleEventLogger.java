@@ -1,4 +1,7 @@
-public class ConsoleEventLogger implements EventLogger {
+package Loggers;
+
+public class
+ConsoleEventLogger implements EventLogger {
 
     @Override
     public void logEvent(Event event){

@@ -1,6 +1,7 @@
+package Loggers;
+
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
@@ -14,9 +15,10 @@ public class FileEventLogger implements EventLogger {
         this.filename = filename;
     }
 
-//    @Autowired  // Почему это необходимо тут?
+    @Autowired
 //    @PostConstruct
     public void init() throws IOException {
+        System.out.println("TEST: INIT");
         this.file = new File(filename);
         if (file.exists() && !file.canWrite()) {
             throw new IllegalArgumentException("Can't write to file " + filename);

@@ -1,8 +1,15 @@
+package Loggers;
+
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+//@Component
 public class Client {
+//    @Value("${greeting}")
     private String greeting;
+//    @Value("${id}")
     private String id;
+//    @Value("${name}")
     private String fullName;
 
     public Client() {

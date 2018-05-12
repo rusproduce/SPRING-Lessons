@@ -1,3 +1,5 @@
+package Loggers;
+
 import java.util.List;
 
 public class CombinedEventLogger implements EventLogger {
@@ -9,7 +11,7 @@ public class CombinedEventLogger implements EventLogger {
 
     @Override
     public void logEvent(Event event) {
-//        loggers.stream().forEach(e->e.logEvent(event));
+//        loggers.forEach(e->e.logEvent(event));
         for (EventLogger e: loggers){
             e.logEvent(event);  //как написать лямдой?
         }
