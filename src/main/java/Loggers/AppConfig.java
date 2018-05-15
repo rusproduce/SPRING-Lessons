@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 @Configuration
-//@PropertySource("classpath:client.properties")
+//@PropertySource("classpath:client.properties")  //Как указать вместо значений переменные в проперти?
 public class AppConfig {
     @Bean
     public Client client() {

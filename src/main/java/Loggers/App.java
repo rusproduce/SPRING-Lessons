@@ -19,28 +19,28 @@ public class App {
     }
 
     public static void main(String[] args) {
-//        ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("Spring.xml");
-//        App app = (App) ctx.getBean("app");
-//        Event event = ctx.getBean(Event.class);
+        ConfigurableApplicationContext ctx = new ClassPathXmlApplicationContext("Spring.xml");
+        App app = (App) ctx.getBean("app");
+        Event event = ctx.getBean(Event.class);
+        System.out.println(app.client.getGreeting());
+        app.logEvent(null, event, "So...");
+        app.logEvent(null, ctx.getBean(Event.class), "I made you up, bro, that's why you so awesome!");
+        app.logEvent(EventType.ERROR, ctx.getBean(Event.class), "Hi 1!");
+        app.logEvent(EventType.INFO, ctx.getBean(Event.class), "I made you up!");
+        ctx.close();
+
+//        AnnotationConfigApplicationContext ctxAnnotation = new AnnotationConfigApplicationContext(AppConfig.class);
+//        App app = (App) ctxAnnotation.getBean("app");
 //
-//        app.logEvent(null, event, "So...");
-//        app.logEvent(null, ctx.getBean(Event.class), "I made you up, bro, that's why you so awesome!");
-//        app.logEvent(EventType.ERROR, ctx.getBean(Event.class), "Hi 1!");
-//        app.logEvent(EventType.INFO, ctx.getBean(Event.class), "I made you up!");
-//        ctx.close();
-
-        AnnotationConfigApplicationContext ctxAnnotation = new AnnotationConfigApplicationContext(AppConfig.class);
-        App app = (App) ctxAnnotation.getBean("app");
-
-        app.logEvent(null, ctxAnnotation.getBean(Event.class), "So...");
-        app.logEvent(null, ctxAnnotation.getBean(Event.class), "I made you up, bro, that's why you so awesome!");
+//        app.logEvent(null, ctxAnnotation.getBean(Event.class), "So...");
 //        app.logEvent(null, ctxAnnotation.getBean(Event.class), "I made you up, bro, that's why you so awesome!");
-//        app.logEvent(null, ctxAnnotation.getBean(Event.class), "I made you up, bro, that's why you so awesome!");
-//        app.logEvent(null, ctxAnnotation.getBean(Event.class), "I made you up, bro, that's why you so awesome!");
-//        app.logEvent(null, ctxAnnotation.getBean(Event.class), "I made you up, bro, that's why you so awesome!");
-        app.logEvent(EventType.ERROR, ctxAnnotation.getBean(Event.class), "Hi 1!");
-        app.logEvent(EventType.INFO, ctxAnnotation.getBean(Event.class), "I made you up!");
-        ctxAnnotation.close();
+////        app.logEvent(null, ctxAnnotation.getBean(Event.class), "I made you up, bro, that's why you so awesome!");
+////        app.logEvent(null, ctxAnnotation.getBean(Event.class), "I made you up, bro, that's why you so awesome!");
+////        app.logEvent(null, ctxAnnotation.getBean(Event.class), "I made you up, bro, that's why you so awesome!");
+////        app.logEvent(null, ctxAnnotation.getBean(Event.class), "I made you up, bro, that's why you so awesome!");
+//        app.logEvent(EventType.ERROR, ctxAnnotation.getBean(Event.class), "Hi 1!");
+//        app.logEvent(EventType.INFO, ctxAnnotation.getBean(Event.class), "I made you up!");
+//        ctxAnnotation.close();
     }
 
     private void logEvent(EventType eventType, Event event, String msg) {

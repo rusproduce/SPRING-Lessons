@@ -1,6 +1,7 @@
 package Loggers;
 
 import java.text.DateFormat;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -23,6 +24,11 @@ public class Event {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public static Boolean isDay(int start, int end){
+        LocalTime localTime = LocalTime.now();
+        return localTime.getHour() > start && localTime.getHour() < end;
     }
 
     @Override

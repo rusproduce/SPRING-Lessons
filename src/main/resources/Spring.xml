@@ -13,25 +13,24 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-    <context:annotation-config/>
-    <!--<context:component-scan base-package="com."/>-->
+    <!--<context:annotation-config/>-->
     <import resource="Loggers.xml"/>
 
-    <bean id="client" class="Client" c:id="${id}" c:fullName="${name}" p:greeting="${greeting}"/>
+    <bean id="client" class="Loggers.Client" c:id="#{clientProps['id']}" c:fullName="${name}" p:greeting="${greeting}"/>
     <util:map id="loggerMap">
         <entry key="INFO" value-ref="consoleEventLogger"/>
         <entry key="ERROR" value-ref="combinedEventLogger"/>
     </util:map>
-    <bean id="app" class="App" c:loggers-ref="loggerMap" c:client-ref="client" c:defaultLogger-ref="cacheFileEventLogger"/>
-    <bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>
-    <bean id="event" class="Event" scope="prototype" c:df-ref="dateFormat">
+    <bean id="app" class="Loggers.App" c:loggers-ref="loggerMap" c:client-ref="client"
+          c:defaultLogger="#{ T(Loggers.Event).isDay(${isDayStart}, clientProps.isDayEnd) ? cacheFileEventLogger : consoleEventLogger}"/>
+    <!--<bean id="dateFormat" class="java.text.DateFormat" factory-method="getDateTimeInstance"/>-->
+    <bean id="event" class="Loggers.Event" scope="prototype" c:df="#{T(java.text.DateFormat).getDateTimeInstance()}">
         <constructor-arg>
-            <bean class="java.util.Date"/> <!--Как записать внутренний бин с использованием c:? -->
+            <bean class="java.util.Date"/>
         </constructor-arg>
     </bean>
-    <util:properties id="clientProps" location="classpath:client.properties"/>
-    <!--Что такое classpath? И зачем нужен util:properties?-->
 
+    <util:properties id="clientProps" location="classpath:client.properties"/>
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="locations">
             <list>
